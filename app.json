@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "magnusday_mobo",
-    "slug": "magnusday_mobo",
+    "name": "magnusday",
+    "slug": "magnusday",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
@@ -15,7 +15,11 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
+    },
+    "androidStatusBar": {
+      "backgroundColor": "#000000",
+      // "barStyle": "dark-content"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -25,6 +29,14 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.carlosbruno.magnusday",
+      "permissions": [],
+      "adaptiveIcon": {
+        "backgroundColor": "#ffffff",
+        "foregroundImage": "./assets/icon.png"
+      }
     }
   }
 }
