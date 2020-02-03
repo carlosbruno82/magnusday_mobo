@@ -40,7 +40,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     position: "absolute",
     top: 270,
-    right: 163
+    right: 115,
+    justifyContent: "center",
+    alignItems: "center" 
   },
 
   clock: {
@@ -57,18 +59,18 @@ const styles = StyleSheet.create({
   menos: {
     color: '#fff',
     fontSize: 30,
-    paddingRight: 40
+    paddingRight: 50
   },
   
   zero: {
     color: '#fff',
-    fontSize: 30,
-    paddingRight: 
+    fontSize: 30
   },
 
   mais: {
     color: '#fff',
-    fontSize: 30
+    fontSize: 30,
+    paddingLeft: 50
   },
 
   container: {
@@ -89,6 +91,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 240,
     right: 163,
-    // marginBottom: 500
-  }
+  },
+
+  
 })
