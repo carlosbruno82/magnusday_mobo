@@ -1,10 +1,28 @@
 import React from 'react'
-import { View, Text, StyleSheet, ImageBackground } from 'react-native'
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native'
 
 import clock from '../../assets/clock.png'
 
+import Sound from 'react-native-sound'
+
 export default function Main() {
+  let numero = '00:00:00'
+  let zeroInt = '0'
+  let zeroMin = '0'
+  let botao = 'PLAY'
+  let seconds = 0
+  let minutes = 0
+  let hours = 0
+  let min = 0
+  let minTotal = 0
+  let int = 0
+  let intTotal = 0
+
+  let timer = null
+  const beep = new Sound('../../assets/beep.mp3')
   
+
+
   
   
   
@@ -16,19 +34,24 @@ export default function Main() {
       >
         <View style={styles.contMin}>
           <Text style={styles.menos}>-</Text>
-          <Text style={styles.zero}>0</Text>
+          <Text style={styles.zero}>{zeroMin}</Text>
           <Text style={styles.mais}>+</Text>
         </View>
 
         <View style={styles.container}>
-          <Text style={styles.cronometro}>00:00:00</Text>
+          <Text style={styles.cronometro}>{numero}</Text>
         </View>
 
         <View style={styles.contInt}>
-          <Text style={styles.texto}>-</Text>
-          <Text style={styles.textos}>0</Text>
-          <Text style={styles.textos}>+</Text>
+          <Text style={styles.menos}>-</Text>
+          <Text style={styles.zero}>{zeroInt}</Text>
+          <Text style={styles.mais}>+</Text>
         </View>
+
+        <TouchableOpacity style={styles.botao}>
+          <Text style={styles.botaText}>{botao}</Text>
+          <Text style={styles.botaText}>LIMPAR</Text>
+        </TouchableOpacity>
       </ImageBackground>
   )
 }
@@ -49,11 +72,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems:'center'
-  },
-
-  textos: {
-    color: '#fff',
-    fontSize: 30
   },
 
   menos: {
@@ -90,8 +108,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     position: "absolute",
     bottom: 240,
-    right: 163,
+    right: 115
   },
 
-  
+  botao: {
+    flex: 1,
+    flexDirection: 'row',
+    position: "absolute",
+    bottom: 150,
+    // right: 115
+  },
+
+  botaText: {
+    color: "#000",
+    paddingHorizontal: 50
+  },
+
 })
