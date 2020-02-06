@@ -4,8 +4,14 @@ import { Audio } from 'expo-av'
 
 import clock from '../../assets/clock.png'
 
+const beep = new Audio.Sound()
+
 class Cronometro extends Component{
-    
+  
+  async componentDidMount() {
+    await beep.loadAsync(require('../../assets/beep.mp3'))
+  }
+
   constructor(props){
       super(props)
       this.state = {
@@ -22,7 +28,6 @@ class Cronometro extends Component{
           totalInter: 0
       }
 
-      this.beep = new Audio.Sound()
       this.timer = null
       
       this.startCounting = this.startCounting.bind(this)
@@ -32,7 +37,9 @@ class Cronometro extends Component{
       this.mais = this.mais.bind(this)
       this.menosInter = this.menosInter.bind(this)
       this.maisInter = this.maisInter.bind(this)
-      playBeep = this.playBeep.bind(this)
+      this.playLoopBeep = this.playLoopBeep.bind(this)
+      this.playBeep = this.playBeep.bind(this)
+      this.stopBeep = this.stopBeep.bind(this)
   }
 
   startCounting = () => {
@@ -59,12 +66,14 @@ class Cronometro extends Component{
                 state.h3 = state.minInter
                 state.total = 0
                 state.totalInter =0
+                this.playLoopBeep()
             } 
 
             if(state.totalInter == 0){
               this.playBeep()
               state.totalInter = state.minInter * 60
-            } else if(state.totalInter == 57){
+            } else if(state.totalInter == 54 ){
+              this.stopBeep()
             }
 
             state.numero = `${state.hours ? (state.hours > 9 ? state.hours : "0" + state.hours) : "00"}:${state.minutes ? (state.minutes > 9 ? state.minutes : "0" + state.minutes) : "00"}:${state.seconds > 9 ? state.seconds : "0" + state.seconds}`
@@ -81,6 +90,7 @@ class Cronometro extends Component{
       }   else {
           this.timer = setInterval(this.startCounting, 1000)
           state.botao = 'PAUSE'
+          this.stopBeep()
       }
       this.setState(state)
   }   
@@ -101,6 +111,7 @@ class Cronometro extends Component{
       state.minInter = 0
       state.totalInter = 0
       state.h3 = state.minInter
+      this.stopBeep()
       this.setState(state)
   }
 
@@ -147,13 +158,16 @@ class Cronometro extends Component{
   }
 
   playBeep = async () => {
-    try {
-      await this.beep.unloadAsync()
-      await this.beep.loadAsync(require('../../assets/beep.mp3'))
-      await this.beep.playAsync()
-    } catch (err) {
-      console.warn("Couldn't Play audio", err)
-    }
+    await beep.playAsync()
+  }
+
+  playLoopBeep = async () => {  
+    await beep.playAsync()
+    await beep.setIsLoopingAsync(true)
+  }
+  
+  stopBeep = async () => {
+    await beep.stopAsync()
   }
 
   render(){
