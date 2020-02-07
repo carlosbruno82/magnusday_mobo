@@ -5,10 +5,12 @@ import { Audio } from 'expo-av'
 import clock from '../../assets/clock.png'
 
 const beep = new Audio.Sound()
+const beepLoop = new Audio.Sound()
 
 class Cronometro extends Component{
   
   async componentDidMount() {
+    await beepLoop.loadAsync(require('../../assets/beep.mp3'))
     await beep.loadAsync(require('../../assets/beep.mp3'))
   }
 
@@ -65,16 +67,17 @@ class Cronometro extends Component{
                 state.h2 = state.min
                 state.h3 = state.minInter
                 state.total = 0
-                state.totalInter =0
+                state.totalInter = 0
                 this.playLoopBeep()
             } 
 
             if(state.totalInter == 0){
               this.playBeep()
               state.totalInter = state.minInter * 60
-            } else if(state.totalInter == 54 ){
-              this.stopBeep()
-            }
+            } 
+            // else if(state.totalInter == 54 ){
+            //   this.stopBeep()
+            // }
 
             state.numero = `${state.hours ? (state.hours > 9 ? state.hours : "0" + state.hours) : "00"}:${state.minutes ? (state.minutes > 9 ? state.minutes : "0" + state.minutes) : "00"}:${state.seconds > 9 ? state.seconds : "0" + state.seconds}`
             this.setState(state)
@@ -158,16 +161,22 @@ class Cronometro extends Component{
   }
 
   playBeep = async () => {
+    await beep.unloadAsync()
+    await beep.loadAsync(require('../../assets/beep.mp3'))
     await beep.playAsync()
+    await beep.setIsLoopingAsync(false)
   }
 
   playLoopBeep = async () => {  
-    await beep.playAsync()
-    await beep.setIsLoopingAsync(true)
+    await beepLoop.unloadAsync()
+    await beepLoop.loadAsync(require('../../assets/beep.mp3'))
+    await beepLoop.playAsync()
+    await beepLoop.setIsLoopingAsync(true)
   }
   
   stopBeep = async () => {
-    await beep.stopAsync()
+    await beepLoop.unloadAsync()
+    await beepLoop.loadAsync(require('../../assets/beep.mp3'))
   }
 
   render(){
