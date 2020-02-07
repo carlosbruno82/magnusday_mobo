@@ -10,6 +10,9 @@ const beepLoop = new Audio.Sound()
 class Cronometro extends Component{
   
   async componentDidMount() {
+    await beepLoop.unloadAsync()
+    await beep.unloadAsync()
+
     await beepLoop.loadAsync(require('../../assets/beep.mp3'))
     await beep.loadAsync(require('../../assets/beep.mp3'))
   }
@@ -75,9 +78,6 @@ class Cronometro extends Component{
               this.playBeep()
               state.totalInter = state.minInter * 60
             } 
-            // else if(state.totalInter == 54 ){
-            //   this.stopBeep()
-            // }
 
             state.numero = `${state.hours ? (state.hours > 9 ? state.hours : "0" + state.hours) : "00"}:${state.minutes ? (state.minutes > 9 ? state.minutes : "0" + state.minutes) : "00"}:${state.seconds > 9 ? state.seconds : "0" + state.seconds}`
             this.setState(state)
@@ -161,22 +161,40 @@ class Cronometro extends Component{
   }
 
   playBeep = async () => {
-    await beep.unloadAsync()
-    await beep.loadAsync(require('../../assets/beep.mp3'))
-    await beep.playAsync()
-    await beep.setIsLoopingAsync(false)
+    try {
+      await beep.unloadAsync()
+      await beep.loadAsync(require('../../assets/beep.mp3'))
+      await beep.playAsync()
+      await beep.setIsLoopingAsync(false)
+
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   playLoopBeep = async () => {  
-    await beepLoop.unloadAsync()
-    await beepLoop.loadAsync(require('../../assets/beep.mp3'))
-    await beepLoop.playAsync()
-    await beepLoop.setIsLoopingAsync(true)
+    try {
+      await beepLoop.unloadAsync()
+      await beepLoop.loadAsync(require('../../assets/beep.mp3'))
+      await beepLoop.playAsync()
+      await beepLoop.setIsLoopingAsync(true)
+
+    } catch (error) {
+      console.log(error)
+    }
   }
   
   stopBeep = async () => {
-    await beepLoop.unloadAsync()
-    await beepLoop.loadAsync(require('../../assets/beep.mp3'))
+    try {
+      await beepLoop.unloadAsync()
+      await beepLoop.loadAsync(require('../../assets/beep.mp3'))
+
+      await beep.unloadAsync()
+      await beep.loadAsync(require('../../assets/beep.mp3'))
+    
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   render(){
@@ -243,19 +261,20 @@ const styles = StyleSheet.create({
 
   menos: {
     color: '#fff',
-    fontSize: 30,
-    paddingRight: 50
+    fontSize: 35,
+    paddingRight: 50,
   },
   
   zero: {
     color: '#fff',
-    fontSize: 30
+    fontSize: 30,
+    
   },
 
   mais: {
     color: '#fff',
-    fontSize: 30,
-    paddingLeft: 50
+    fontSize: 35,
+    paddingLeft: 50,
   },
 
   container: {
@@ -282,10 +301,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     position: "absolute",
-    bottom: 150,
+    bottom: 120,
   },
 
   botaText: {
+    fontWeight: "bold",
+    fontSize: 25,
     color: "#000",
     paddingHorizontal: 50
   },
