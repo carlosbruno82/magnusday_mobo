@@ -205,11 +205,13 @@ class Cronometro extends Component{
         imageStyle={{resizeMode: 'center'}}
         style={styles.clock}
       >
+        <View style={styles.zeroMin}>
+          <Text style={styles.zero}>{this.state.h2}</Text>
+        </View>
         <View style={styles.contMin}>
           <TouchableOpacity onPress={this.menos}>
             <Text style={styles.menos}>-</Text>
           </TouchableOpacity>
-          <Text style={styles.zero}>{this.state.h2}</Text>
           <TouchableOpacity onPress={this.mais}>
             <Text style={styles.mais}>+</Text>
           </TouchableOpacity>
@@ -217,15 +219,19 @@ class Cronometro extends Component{
         <View style={styles.container}>
           <Text style={styles.cronometro}>{this.state.numero}</Text>
         </View>
+        
         <View style={styles.contInt}>
-        <TouchableOpacity onPress={this.menosInter}>
+          <View style={styles.zeroInt}>
+            <Text style={styles.zero}>{this.state.h3}</Text>
+          </View>
+          <TouchableOpacity onPress={this.menosInter}>
             <Text style={styles.menos}>-</Text>
           </TouchableOpacity>
-          <Text style={styles.zero}>{this.state.h3}</Text>
           <TouchableOpacity onPress={this.maisInter}>
             <Text style={styles.mais}>+</Text>
           </TouchableOpacity>
         </View>
+        
         <View style={styles.botao}>
           <TouchableOpacity  onPress={this.play}>
             < Text style={styles.botaText}>{this.state.botao}</Text>
@@ -243,12 +249,22 @@ export default Cronometro;
 
 const styles = StyleSheet.create({
 
+  zeroMin: {
+    flex: 1,
+    flexDirection: 'row',
+    position: "absolute",
+    top: 270,
+    right: 175,
+    justifyContent: "center",
+    alignItems: "center" 
+  },
+
   contMin: {
     flex: 1,
     flexDirection: 'row',
     position: "absolute",
     top: 270,
-    right: 115,
+    right: 105,
     justifyContent: "center",
     alignItems: "center" 
   },
@@ -261,7 +277,7 @@ const styles = StyleSheet.create({
 
   menos: {
     color: '#fff',
-    fontSize: 35,
+    fontSize: 70,
     paddingRight: 50,
   },
   
@@ -273,8 +289,8 @@ const styles = StyleSheet.create({
 
   mais: {
     color: '#fff',
-    fontSize: 35,
-    paddingLeft: 50,
+    fontSize: 40,
+    paddingLeft: 70,
   },
 
   container: {
@@ -289,12 +305,22 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
 
+  zeroInt: {
+    flex: 1,
+    flexDirection: 'row',
+    position: "absolute",
+    bottom: 10,
+    right: 67,
+  },
+
   contInt: {
     flex: 1,
     flexDirection: 'row',
     position: "absolute",
-    bottom: 240,
-    right: 115
+    bottom: 230,
+    right: 105,
+    justifyContent: "center",
+    alignItems: "center"
   },
 
   botao: {
