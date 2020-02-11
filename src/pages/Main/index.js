@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
-import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { Audio } from 'expo-av'
-
-import clock from '../../assets/clock.png'
 
 const beep = new Audio.Sound()
 const beepLoop = new Audio.Sound()
@@ -200,48 +198,49 @@ class Cronometro extends Component{
   render(){
 
     return (
-      <ImageBackground 
-        source={clock}
-        imageStyle={{resizeMode: 'center'}}
-        style={styles.clock}
-      >
-        <View style={styles.contMin}>
+      <View style={styles.container}>
+        <View style={styles.ContTitle}>
+          <Text style={styles.textTitle}>MINUTO</Text>
+        </View>
+        <View style={styles.contMI}>
           <TouchableOpacity onPress={this.menos}>
-            <Text style={styles.menos}>-</Text>
+            <Text style={styles.textMI}>-</Text>
           </TouchableOpacity>
-          <View>
-            <Text style={styles.zero}>{this.state.h2}</Text>
-          </View>
+            <Text style={styles.textZero}>{this.state.h2}</Text>
           <TouchableOpacity onPress={this.mais}>
-            <Text style={styles.mais}>+</Text>
+            <Text style={styles.textMI}>+</Text>
           </TouchableOpacity>
         </View>
 
-        <View style={styles.container}>
-          <Text style={styles.cronometro}>{this.state.numero}</Text>
+        <View style={styles.contCronometro}>
+          <Text style={styles.textCronometro}>{this.state.numero}</Text>
         </View>
         
-        <View style={styles.contInt}>
+        <View style={styles.contMI}>
           <TouchableOpacity onPress={this.menosInter}>
-            <Text style={styles.menosInt}>-</Text>
+            <Text style={styles.textMI}>-</Text>
           </TouchableOpacity>
           <View>
-            <Text style={styles.zeroInt}>{this.state.h3}</Text>
+            <Text style={styles.textZero}>{this.state.h3}</Text>
           </View>
           <TouchableOpacity onPress={this.maisInter}>
-            <Text style={styles.maisInt}>+</Text>
+            <Text style={styles.textMI}>+</Text>
           </TouchableOpacity>
+        </View>
+
+        <View style={styles.ContTitle}>
+            <Text style={styles.textTitle}>INTERVALO</Text>
         </View>
         
-        <View style={styles.botao}>
+        <View style={styles.contbotao}>
           <TouchableOpacity  onPress={this.play}>
-            < Text style={styles.botaText}>{this.state.botao}</Text>
+            <Text style={styles.textBotao}>{this.state.botao}</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={this.limpar}>
-            <Text style={styles.botaText}>LIMPAR</Text>
+            <Text style={styles.textBotao}>LIMPAR</Text>
           </TouchableOpacity>
         </View>
-      </ImageBackground>
+      </View>
     )
   }
 }
@@ -249,88 +248,77 @@ class Cronometro extends Component{
 export default Cronometro;
 
 const styles = StyleSheet.create({
-  clock: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems:'center'
-  },
-  
-  contMin: {
-    flex: 1,
-    flexDirection: 'row',
-    top: 135,
-    marginRight: -10,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  
-  menos: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 60
-  },
-  
-  zero: {
-    color: '#fff',
-    fontSize: 40,
-    paddingHorizontal: 40
-  },
-  
-  mais: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 40
-  },
-
   container: {
-    marginTop: 50,
-    marginLeft: 20
-  },  
-
-  cronometro: {
-    fontSize: 50,
-    color: "#fff",
-    fontWeight: "bold"
-  },
-  
-  contInt: {
     flex: 1,
+    marginTop: 80,
+  },
+  
+  ContTitle: {
     flexDirection: 'row',
-    bottom: 80,
-    marginRight: -10,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
   },
-  
-  menosInt: {
-    color: '#fff',
+
+  textTitle: {
     fontWeight: 'bold',
-    fontSize: 60
-  },
-  
-  zeroInt: {
-    color: '#fff',
     fontSize: 40,
-    paddingHorizontal: 40
+  },
+
+  contMI: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+
+  textMI: {
+    fontWeight: 'bold',
+    fontSize: 30,
+    width: 80,
+    height: 50,
+    backgroundColor: '#999',
+    borderRadius: 7,
+    color: '#fff',
+    // borderColor: '#999',
+    // borderWidth: 5,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+  },
+
+  textZero: {
+    fontWeight: 'bold',
+    fontSize: 60,
+  },
+
+  contCronometro: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+
+  textCronometro: {
+    fontWeight: 'bold',
+    fontSize: 70,
+  },
+
+  contbotao: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginTop: 60,
   },
   
-  maisInt: {
-    color: '#fff',
+  textBotao: {
     fontWeight: 'bold',
-    fontSize: 40
-  },
-
-
-  botao: {
-    flexDirection: 'row',
-    bottom: 115
-  },
-
-  botaText: {
-    fontWeight: "bold",
-    fontSize: 25,
-    color: "#000",
-    paddingHorizontal: 40
-  },
-
+    fontSize: 15,
+    width: 120,
+    height: 50,
+    backgroundColor: '#000',
+    borderRadius: 7,
+    color: '#fff',
+    textAlign: 'center',
+    textAlignVertical: 'center',
+  }
 })
