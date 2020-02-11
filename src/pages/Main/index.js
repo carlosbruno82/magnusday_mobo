@@ -205,30 +205,31 @@ class Cronometro extends Component{
         imageStyle={{resizeMode: 'center'}}
         style={styles.clock}
       >
-        <View style={styles.zeroMin}>
-          <Text style={styles.zero}>{this.state.h2}</Text>
-        </View>
         <View style={styles.contMin}>
           <TouchableOpacity onPress={this.menos}>
             <Text style={styles.menos}>-</Text>
           </TouchableOpacity>
+          <View>
+            <Text style={styles.zero}>{this.state.h2}</Text>
+          </View>
           <TouchableOpacity onPress={this.mais}>
             <Text style={styles.mais}>+</Text>
           </TouchableOpacity>
         </View>
+
         <View style={styles.container}>
           <Text style={styles.cronometro}>{this.state.numero}</Text>
         </View>
         
         <View style={styles.contInt}>
-          <View style={styles.zeroInt}>
-            <Text style={styles.zero}>{this.state.h3}</Text>
-          </View>
           <TouchableOpacity onPress={this.menosInter}>
-            <Text style={styles.menos}>-</Text>
+            <Text style={styles.menosInt}>-</Text>
           </TouchableOpacity>
+          <View>
+            <Text style={styles.zeroInt}>{this.state.h3}</Text>
+          </View>
           <TouchableOpacity onPress={this.maisInter}>
-            <Text style={styles.mais}>+</Text>
+            <Text style={styles.maisInt}>+</Text>
           </TouchableOpacity>
         </View>
         
@@ -248,55 +249,42 @@ class Cronometro extends Component{
 export default Cronometro;
 
 const styles = StyleSheet.create({
-
-  zeroMin: {
-    flex: 1,
-    flexDirection: 'row',
-    position: "absolute",
-    top: 270,
-    right: 175,
-    justifyContent: "center",
-    alignItems: "center" 
-  },
-
-  contMin: {
-    flex: 1,
-    flexDirection: 'row',
-    position: "absolute",
-    top: 270,
-    right: 105,
-    justifyContent: "center",
-    alignItems: "center" 
-  },
-
   clock: {
     flex: 1,
     justifyContent: 'center',
     alignItems:'center'
   },
-
+  
+  contMin: {
+    flex: 1,
+    flexDirection: 'row',
+    top: 135,
+    marginRight: -10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  
   menos: {
     color: '#fff',
-    fontSize: 70,
-    paddingRight: 50,
+    fontWeight: 'bold',
+    fontSize: 60
   },
   
   zero: {
     color: '#fff',
-    fontSize: 30,
-    
+    fontSize: 40,
+    paddingHorizontal: 40
   },
-
+  
   mais: {
     color: '#fff',
-    fontSize: 40,
-    paddingLeft: 70,
+    fontWeight: 'bold',
+    fontSize: 40
   },
 
   container: {
-    position: "absolute",
-    top: 352,
-    right: 85,
+    marginTop: 50,
+    marginLeft: 20
   },  
 
   cronometro: {
@@ -304,37 +292,45 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "bold"
   },
-
-  zeroInt: {
-    flex: 1,
-    flexDirection: 'row',
-    position: "absolute",
-    bottom: 10,
-    right: 67,
-  },
-
+  
   contInt: {
     flex: 1,
     flexDirection: 'row',
-    position: "absolute",
-    bottom: 230,
-    right: 105,
+    bottom: 80,
+    marginRight: -10,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+  },
+  
+  menosInt: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 60
+  },
+  
+  zeroInt: {
+    color: '#fff',
+    fontSize: 40,
+    paddingHorizontal: 40
+  },
+  
+  maisInt: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 40
   },
 
+
   botao: {
-    flex: 1,
     flexDirection: 'row',
-    position: "absolute",
-    bottom: 120,
+    bottom: 115
   },
 
   botaText: {
     fontWeight: "bold",
     fontSize: 25,
     color: "#000",
-    paddingHorizontal: 50
+    paddingHorizontal: 40
   },
 
 })

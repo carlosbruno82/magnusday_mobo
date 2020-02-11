@@ -13,7 +13,7 @@ export default function Intro({ navigation }) {
       <Image source={logo}  style={{width: 250, height: 40}} />
       <Text style={styles.magno}>Uma ideia de Carlos Magno</Text>
       <View style={styles.containerBruno}>
-        <Text>By <Text style={styles.bruno}>Carlos Bruno</Text></Text>
+        <Text>Dev <Text style={styles.bruno}>Carlos Bruno</Text></Text>
       </View>
       <TouchableOpacity style={styles.botao} onPress={handleSubmit} >
         <Text style={styles.textBotao}>Clique aqui para começar</Text>
